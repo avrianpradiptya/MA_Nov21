@@ -1,79 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Morning Fun Station 🎉</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      color: white;
-      min-height: 100vh;
-    }
-    h1 {
-      text-align: center;
-      padding: 30px 10px;
-      font-size: 2.8rem;
-      margin: 0;
-      text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
-    }
-    .container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      padding: 0 10px 20px;
-      justify-content: center;
-    }
-    .game {
-      flex: 1;
-      min-width: 300px;
-      max-width: 700px;
-      background: rgba(255,255,255,0.1);
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    }
-    .game h2 {
-      margin: 0;
-      padding: 12px;
-      text-align: center;
-      background: rgba(0,0,0,0.3);
-      font-size: 1.5rem;
-    }
-    iframe {
-      width: 100%;
-      height: 700px;
-      border: none;
-      display: block;
-    }
-    @media (max-width: 800px) {
-      h1 { font-size: 2.2rem; }
-      iframe { height: 600px; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reverse Guessing Game Control Panel</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f4f4f4; }
+        .container { display: flex; max-width: 1200px; margin: 0 auto; height: calc(100vh - 80px); }
+        .left { width: 30%; background: #e8f4fd; padding: 20px; overflow-y: auto; border-right: 2px solid #ddd; }
+        .right { width: 70%; padding: 20px; position: relative; background: #fff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .title { text-align: center; font-size: 28px; font-weight: bold; margin-bottom: 20px; color: #333; }
+        .group { margin-bottom: 30px; padding: 15px; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .group h3 { margin: 0 0 10px; color: #007bff; }
+        button { background: #007bff; color: white; border: none; padding: 12px 15px; border-radius: 4px; cursor: pointer; font-size: 16px; width: 100%; }
+        button:hover { background: #0056b3; }
+        .score-container { margin-top: 12px; }
+        .score-label { display: block; font-weight: bold; margin-bottom: 6px; }
+        input[type="range"] { width: 100%; height: 32px; }
+        .score-value { font-size: 24px; font-weight: bold; color: #28a745; text-align: center; display: block; margin-top: 6px; }
+
+        /* Placeholder area */
+        .placeholder {
+            width: 100%;
+            height: 100%;
+            background: #f8f9fa;
+            border: 3px dashed #ccc;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #555;
+            font-size: 20px;
+        }
+        .placeholder img { max-width: 90%; max-height: 70%; margin-bottom: 20px; border-radius: 8px; }
+        .placeholder strong { font-size: 26px; color: #007bff; }
+    </style>
 </head>
 <body>
+    <h1 class="title">Reverse Guessing Game Control Panel</h1>
+    <div class="container">
+        <!-- LEFT: Controls & Scores -->
+        <div class="left">
+            <div class="group">
+                <h3>Group 1</h3>
+                <button onclick="launchGem('group1')">Launch Group 1 Gem</button>
+                <div class="score-container">
+                    <label class="score-label">Score (0–2):</label>
+                    <input type="range" id="score1" min="0" max="2" value="0" step="1" oninput="updateScore('1', this.value)">
+                    <span class="score-value" id="value1">0</span>
+                </div>
+            </div>
 
-  <h1>Morning Fun Station 🎯✨</h1>
+            <div class="group">
+                <h3>Group 2</h3>
+                <button onclick="launchGem('group2')">Launch Group 2 Gem</button>
+                <div class="score-container">
+                    <label class="score-label">Score (0–2):</label>
+                    <input type="range" id="score2" min="0" max="2" value="0" step="1" oninput="updateScore('2', this.value)">
+                    <span class="score-value" id="value2">0</span>
+                </div>
+            </div>
 
-  <div class="container">
-    
-    <!-- Akinator -->
-    <div class="game">
-      <h2>🧞‍♂️ Akinator – Can He Guess Your Character?</h2>
-      <iframe src="https://www.20q.net/embed" width="100%" height="500"></iframe>
-      </div>
-    
-    <!-- Wheel of Names -->
-    <div class="game">
-      <h2>🎡 Wheel of Names – Who’s Next?</h2>
-      <iframe src="https://wheelofnames.com/" allowfullscreen></iframe>
+            <div class="group">
+                <h3>Group 3</h3>
+                <button onclick="launchGem('group3')">Launch Group 3 Gem</button>
+                <div class="score-container">
+                    <label class="score-label">Score (0–2):</label>
+                    <input type="range" id="score3" min="0" max="2" value="0" step="1" oninput="updateScore('3', this.value)">
+                    <span class="score-value" id="value3">0</span>
+                </div>
+            </div>
+
+            <div class="group">
+                <h3>Group 4</h3>
+                <button onclick="launchGem('group4')">Launch Group 4 Gem</button>
+                <div class="score-container">
+                    <label class="score-label">Score (0–2):</label>
+                    <input type="range" id="score4" min="0" max="2" value="0" step="1" oninput="updateScore('4', this.value)">
+                    <span class="score-value" id="value4">0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT: Static placeholder -->
+        <div class="right">
+            <div class="placeholder">
+                <!-- Replace the src below with your own image when ready -->
+                <img src="https://via.placeholder.com/800x600/eeeeee/999999?text=Gemini+Game+Window" alt="Gemini placeholder">
+                <strong>← Click a Group button to open Gemini</strong>
+                <p>The game will appear in a new window.<br>Scores are updated here after each round.</p>
+            </div>
+        </div>
     </div>
-    
-  </div>
 
+    <script>
+        const gemUrls = {
+            group1: 'https://gemini.google.com/gem/10E_2pvKyFSVbayrnXh7OU2iw5NI1W6di?usp=sharing',
+            group2: 'https://gemini.google.com/gem/1wBZ5VIaW4owVSJ2TVjGzaeH3T-KxHUa6?usp=sharing',
+            group3: 'https://gemini.google.com/gem/1RJYq6PTadV9TXiW1-KAafEEW0SIwqBfH?usp=sharing',
+            group4: 'https://gemini.google.com/gem/1Bf8OaGaiRmfr0SIrP1kqZ0MeMsRIZnKo?usp=sharing'
+        };
+
+        function launchGem(group) {
+            const url = gemUrls[group];
+            window.open(url, group, 'width=900,height=700,resizable=yes,scrollbars=yes');
+        }
+
+        function updateScore(groupNum, value) {
+            document.getElementById('value' + groupNum).textContent = value;
+            localStorage.setItem('score' + groupNum, value);
+        }
+
+        // Restore saved scores
+        window.onload = function() {
+            for (let i = 1; i <= 4; i++) {
+                const saved = localStorage.getItem('score' + i);
+                if (saved !== null) {
+                    document.getElementById('score' + i).value = saved;
+                    document.getElementById('value' + i).textContent = saved;
+                }
+            }
+        };
+    </script>
 </body>
 </html>
